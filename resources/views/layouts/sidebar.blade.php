@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="/kategori.kategori  " class='sidebar-link'>
+                    <a href="/kategori  " class='sidebar-link'>
                         <i class="bi bi-stack"></i>
                         <span>Kategori</span>
                     </a>

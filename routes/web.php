@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 // Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
 
-Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,8 +50,10 @@ Route::get('/partial.create', function () {
 });
 
 Route::get('/kategori.kategori', function () {
-    return view('kategori.kategori');
 });
+Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
+
+
 
 Route::get('/kategori.create', function () {
     return view('kategori.create');

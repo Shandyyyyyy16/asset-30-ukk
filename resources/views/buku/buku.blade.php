@@ -30,8 +30,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th> Kategori</th>
-                                    <th>judul</th>
+                                    <th> kategori</th>
+                                    <th>judul buku</th>
+                                    <th>penulis</th>
                                     <th>penulis</th>
                                     <th>tindakan</th>
                                 </tr>

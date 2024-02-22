@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">DataTable</li>
                         </ol>
-                        <a href="/kategori.create" type="button" class="btn btn-secondary mb-4">Tambah kategori </a>
+                        <a href="{{route('kategori.create')}}" type="button" class="btn btn-secondary mb-4">Tambah kategori </a>
                     </nav>
                 </div>
             </div>
@@ -41,13 +41,18 @@
                             @forelse ($posts as $item)
                                 
                             <tr>
-                                <td>1</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->nm_kategori}}</td>
                                 <td>
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('kategori.destroy', $item->id) }}" method="POST">
                                     <a href="/kategori.edit"> <button type="button"
                                             class="btn btn-danger">edit</button></a>
-                                    <button type="button" class="btn btn-primary">Hapus</button>
-                                    @csrf
+                                            @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-primary">Hapus</button>
+                                   
+
+                            </form>
 
                                 </td>
                                 <td class="text-center">
@@ -60,7 +65,7 @@
                             
                         </tbody>
                     </table>
-                    {{ $kategori->links() }}
+                    {{ $posts->links() }}
                     
                 </div>
             </div>
