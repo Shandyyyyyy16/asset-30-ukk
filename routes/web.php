@@ -94,6 +94,5 @@ Route::get('/kategori.edit', function () {
 Route::get('/user.buku', function () {
     return view('user.buku');
 });
-Route::get('/coba', function () {
-    return view('user.buku');
-});
+
+
