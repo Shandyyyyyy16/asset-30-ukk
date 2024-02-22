@@ -15,7 +15,7 @@
         <div class="container">
             <h2 class="mt-5">Tambah Kategori</h2>
 
-            <form action="/submit_kategori" method="post">
+            <form action="{{ Route}}" method="post">
                 <div class="form-group">
                     <label for="kategori">Kategori:</label>
                     <input type="text" class="form-control" id="kategori" name="kategori">

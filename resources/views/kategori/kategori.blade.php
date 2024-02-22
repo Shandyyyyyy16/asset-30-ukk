@@ -37,18 +37,31 @@
                             </tr>
                         </thead>
                         <tbody>
+                          
+                            @forelse ($posts as $item)
+                                
                             <tr>
                                 <td>1</td>
-                                <td>Horor</td>
+                                <td>{{ $item->nm_kategori}}</td>
                                 <td>
                                     <a href="/kategori.edit"> <button type="button"
                                             class="btn btn-danger">edit</button></a>
                                     <button type="button" class="btn btn-primary">Hapus</button>
-                                </td>
+                                    @csrf
 
+                                </td>
+                                <td class="text-center">
+
+                                </td>
                             </tr>
+                            @empty
+                                
+                            @endforelse
+                            
                         </tbody>
                     </table>
+                    {{ $kategori->links() }}
+                    
                 </div>
             </div>
 

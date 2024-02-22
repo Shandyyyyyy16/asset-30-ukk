@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Route::Post('/kategori.kategori','KategoriController@kategori.kategori');
+
+
+// Route::get('/', [LoginController::class, 'login'])->name('login');
+// Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
+
+// Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+// Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+
+Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
 
 Route::get('/', function () {
     return view('welcome');
