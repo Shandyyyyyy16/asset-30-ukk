@@ -15,7 +15,7 @@
                                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">DataTable</li>
                             </ol>
-                            <a href="/buku.create" type="button" class="btn btn-secondary mb-4">Tambah Buku </a>
+                            <a href="{{route('buku.create')}}" type="button" class="btn btn-secondary mb-4">Tambah Buku </a>
                         </nav>
                     </div>
                 </div>
@@ -26,37 +26,55 @@
                         <a href="/kategori.create" type="button" class="btn btn-secondary mb-4">Cetak Laporan </a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-dark" id="table1">
+                        <table class="table table-dark border-dark" id="table1">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th> kategori</th>
                                     <th>judul buku</th>
                                     <th>penulis</th>
-                                    <th>penulis</th>
+                                    <th>penerbit</th>
+                                    <th>tahun_terbit</th>
+                                    <th>gambar</th>
                                     <th>tindakan</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse ($buku as $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td>novel</td>
-                                    <td>hujan</td>
-                                    <td>Tere Liye</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$item->kategori->nm_kategori}}</td>
+                                    <td>{{$item->judul}}</td>
+                                    <td>{{$item->penulis}}</td>
+                                    <td>{{$item->penerbit}}</td>
+                                    <td>{{$item->thn_terbit}}</td>
+                                    <td><img src="{{ asset('img/buku/'.$item->gambar) }}" alt="" width="250" height="250"></td>
+                                   
                                     <td>
-
+                                        <div class="col-4">
+                                            
+                                        </div>
                                         <a href="/buku.detail"> <button type="button"
                                                 class="btn btn-info">detail</button></a>
+                                                <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-secondary">Edit</a>
 
-                                        <a href="/"> <button type="button"
-                                                class="btn btn-success">Peminjam</button></a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('buku.destroy', $item->id) }}" method="POST">
+                                                            @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-primary">Hapus</button>
+                                                   
+                
+                                            </form>
 
 
-
-                                        <button type="button" class="btn btn-warning">Tambah ke koleksi</button>
+                                        
                                     </td>
 
                                 </tr>
+                                @empty
+                                    
+                                @endforelse
+                                
                             </tbody>
                         </table>
                     </div>

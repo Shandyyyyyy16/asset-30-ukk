@@ -2,6 +2,8 @@
 
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BukuController;
+use App\Http\Controllers\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 // Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+
+
+Route::resource('/buku', \App\Http\Controllers\BukuController::class);
+
+Route::post('/buku/{id}', [BukuController::class, 'index']);
 
 
 
@@ -49,9 +56,10 @@ Route::get('/partial.create', function () {
     return view('partial.create');
 });
 
-Route::get('/kategori.kategori', function () {
-});
+
 Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
+
+Route::post('/kategori/{id}', [KategoriController::class, 'index']);
 
 
 
@@ -59,9 +67,7 @@ Route::get('/kategori.create', function () {
     return view('kategori.create');
 });
 
-Route::get('/buku.buku', function () {
-    return view('buku.buku');
-});
+
 
 Route::get('/koleksi.koleksi', function () {
     return view('koleksi.koleksi');
@@ -83,18 +89,12 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
-Route::get('/buku.create', function () {
-    return view('buku.create');
-});
+
 Route::get('/user.dashboard', function () {
     return view('user.dashboard');
 });
 
-Route::get('/kategori.edit', function () {
-    return view('kategori.edit');
-});
+
 Route::get('/user.buku', function () {
     return view('user.buku');
 });
-
-

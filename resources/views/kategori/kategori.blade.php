@@ -45,11 +45,14 @@
                                 <td>{{ $item->nm_kategori}}</td>
                                 <td>
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('kategori.destroy', $item->id) }}" method="POST">
-                                    <a href="/kategori.edit"> <button type="button"
-                                            class="btn btn-danger">edit</button></a>
+                                    
                                             @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-primary">Hapus</button>
+
+                                    <a href="{{ route('kategori.edit', $item->id) }}" class="btn btn-secondary">Edit</a>
+                                   
+                                  
                                    
 
                             </form>

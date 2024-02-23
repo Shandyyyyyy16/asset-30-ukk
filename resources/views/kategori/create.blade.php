@@ -8,6 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tambah Kategori</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     </head>
 
     <body>
@@ -22,6 +27,7 @@
                     <input type="text" class="form-control" id="kategori" name="nm_kategori">
                 </div>
                 <button type="submit" class="btn btn-primary">Tambah</button>
+               
             </form>
           
            

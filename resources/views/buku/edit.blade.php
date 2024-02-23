@@ -12,39 +12,39 @@
 
     <body>
         <div class="container mt-5">
-            <h2>Form Tambah Buku</h2>
-            <form action="{{ route('buku.store') }}" method="post" enctype="multipart/form-data">
+            <h2>Form edit</h2>
+            <form action="{{ route('buku.edit') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
                     <label for="judul">judul buku</label>
                     <input type="text" class="form-control" id="nomor" name="judul">
-                    <span class="text-danger">{{ $errors->first('judul') }}</span>
+                  
                 </div>
                 <div class="form-group">
                     <label for="judul">penulis</label>
                     <input type="text" class="form-control" id="nomor" name="penulis">
-                    <span class="text-danger">{{ $errors->first('penulis') }}</span>
+                   
                 </div>
                 <div class="form-group">
                     <label for="judul">penerbit</label>
                     <input type="text" class="form-control" id="nomor" name="penerbit">
-                    <span class="text-danger">{{ $errors->first('penerbit') }}</span>
+                  
                 </div>
                 <div class="form-group">
                     <label for="judul">thn terbit</label>
                     <input type="date" class="form-control" id="nomor" name="thn_terbit">
-                    <span class="text-danger">{{ $errors->first('thn_terbit') }}</span>
+                    
                 </div>
                 <div class="form-group">
                     <label for="judul">DESKRIPSI</label>
                     <input type="text" class="form-control" id="nomor" name="deskripsi">
-                    <span class="text-danger">{{ $errors->first('deskripsi') }}</span>
+                    
                 </div>
                 <div class="form-group">
                     <label for="penulis">gambar:</label>
                     <input type="file" class="form-control" id="nama" name="gambar">
-                    <span class="text-danger">{{ $errors->first('gambar') }}</span>
+                    
                 </div>
                 <div class="form-group">
                     <label for="ulasan">kategori:</label>

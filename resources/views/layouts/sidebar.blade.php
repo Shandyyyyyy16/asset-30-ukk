@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="/buku.buku" class='sidebar-link'>
+                    <a href="{{route('buku.index')}}" class='sidebar-link'>
                         <i class="bi bi-book"></i>
                         <span>Daftar buku</span>
                     </a>
