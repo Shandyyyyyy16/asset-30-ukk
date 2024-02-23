@@ -63,25 +63,32 @@ class BukuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Buku $buku)
     {
+
+        $post = Buku::findOrFail($buku);
+        return view('buku.detail', compact('buku'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Buku $buku)
     {
-        return view('buku.edit', compact('buku'));
+        
+        return view('buku.edit', [
+            'buku' => $buku
+            , 'kategori' => Kategori::pluck('nm_kategori', 'id')
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Buku $buku)
     {
         $this->validate($request, [
-            'nm_buku' => 'required',
+            'judul' => 'required',
             'id_kategori' => 'required',
             'deskripsi' => 'required',
             'penerbit' => 'required',
@@ -90,9 +97,33 @@ class BukuController extends Controller
             'gambar' => 'image:jpeg,jpg,png',
         ]);
 
-        $buku = Buku::find($id);
-        $buku->update($request->all());
-        return redirect()->route('buku.index')->with('success', 'Buku berhasil diperbarui.');
+
+      
+      $buku->update([
+         'judul' => $request->judul,
+            'id_kategori' => $request->id_kategori,
+            'deskripsi' =>  $request->deskripsi,
+            'penerbit' =>   $request->penerbit,
+            'penulis' =>    $request->penulis,
+            'thn_terbit' =>     $request->thn_terbit,
+      ]);
+
+      if($request->hasFile('gambar')){
+
+        $gambar = $request->file('gambar');
+        // $gambar ->storeAs('public/img/buku/', $gambar);
+        $namaGambar= $request -> judul . '.' . $gambar ->extension();
+        $gambar-> move(public_path('img/buku'), $namaGambar);
+
+        Storage::delete('public/img/buku/'.$buku->gambar);
+
+        $buku->update([
+            'gambar' => $namaGambar
+        ]);
+      }
+
+      
+        return redirect()->route('buku.index')->with('success', 'Data Berhasil diubah.     ');
     }
 
     /**

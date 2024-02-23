@@ -13,11 +13,11 @@
 
     <body>
 
-        <div class="container mt-5">
+        {{-- <div class="container mt-5">
             <div class="card" style="width: 300px;">
                 <div class="card-body">
-                    <h5 class="card-title">Hujan</h5>
-                    <p class="card-text"><strong>Kategori:</strong> Novel</p>
+                    <h5 class="card-title">{{$buku->nm_buku}}</h5>
+                    <p class="card-text"><strong>Kategori:</strong></p>
                     <p class="card-text"><strong>Penerbit:</strong> Gramedia</p>
                     <p class="card-text"><strong>Penulis:</strong> Tere Liye</p>
                     <p class="card-text"><strong>Tahun Terbit:</strong> 2024</p>
@@ -30,6 +30,35 @@
                         <a href="/buku.buku" type="button" class="btn-sm btn btn-danger " style="width: 80px;">Kembali</a>
                     </div>
 
+                </div>
+            </div>
+        </div> --}}
+
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{$buku->judul}}</h5>
+                    <div class="mb-3">
+                        <strong>Kategori:</strong> {{$buku->kategori->nama}}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Penerbit:</strong> {{$buku->penerbit}}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Penulis:</strong> {{$buku->penulis}}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Tahun Terbit:</strong> {{$buku->tahun_terbit}}
+                    </div>
+                    <div class="mb-3">
+                        <strong>deskripsi:</strong> {{$buku->deskripsi}}
+                    </div>
+                    <div class="mb-3">
+                        <strong>gambar:</strong> <img src="{{ asset('public/img/'.$item->gambar) }}">
+                    </div>
+                    
+                    <a href="{{ route('buku.ulasan', $buku->id) }}" class="btn btn-primary">Ulasan</a>
+                    <a href="{{ route('buku.index') }}" class="btn btn-secondary">Kembali</a>
                 </div>
             </div>
         </div>

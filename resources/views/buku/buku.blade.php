@@ -23,7 +23,7 @@
             <section class="section">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/kategori.create" type="button" class="btn btn-secondary mb-4">Cetak Laporan </a>
+                        <a href="#" type="button" class="btn btn-secondary mb-4">Cetak Laporan </a>
                     </div>
                     <div class="card-body">
                         <table class="table table-dark border-dark" id="table1">
@@ -48,23 +48,22 @@
                                     <td>{{$item->penulis}}</td>
                                     <td>{{$item->penerbit}}</td>
                                     <td>{{$item->thn_terbit}}</td>
-                                    <td><img src="{{ asset('img/buku/'.$item->gambar) }}" alt="" width="250" height="250"></td>
+                                    <td><img src="{{ asset('img/buku/'.$item->gambar) }}" alt="" width="230" height="200"></td>
                                    
                                     <td>
-                                        <div class="col-4">
-                                            
-                                        </div>
-                                        <a href="/buku.detail"> <button type="button"
-                                                class="btn btn-info">detail</button></a>
-                                                <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-secondary">Edit</a>
 
+                                        {{-- <a href="/buku.detail"> <button type="button"
+                                                class="btn btn-info">detail</button></a> --}}
+                                                <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-secondary">Edit</a>
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('buku.destroy', $item->id) }}" method="POST">
-                                                            @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-primary">Hapus</button>
-                                                   
-                
-                                            </form>
+                                                    @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-primary mt-2">Hapus</button>
+                                         
+                                           
+        
+                                    </form>
+                                              
 
 
                                         
@@ -77,6 +76,7 @@
                                 
                             </tbody>
                         </table>
+                        {{ $buku->links() }}
                     </div>
                 </div>
 

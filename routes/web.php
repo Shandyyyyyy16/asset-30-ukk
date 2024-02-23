@@ -27,8 +27,12 @@ use App\Http\Controllers\KategoriController;
 
 
 Route::resource('/buku', \App\Http\Controllers\BukuController::class);
-
 Route::post('/buku/{id}', [BukuController::class, 'index']);
+
+
+Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
+Route::post('/kategori/{id}', [KategoriController::class, 'index']);
+
 
 
 
@@ -57,9 +61,7 @@ Route::get('/partial.create', function () {
 });
 
 
-Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
 
-Route::post('/kategori/{id}', [KategoriController::class, 'index']);
 
 
 
