@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
-
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
 {
@@ -14,18 +15,22 @@ class BukuController extends Controller
      */
     public function index()
     {
-        $buku = Buku::get();
+      
 
-        $posts = Buku::latest()->paginate(5);        
-        return view('buku.buku', compact('posts'));                                                                                                
+        $buku = Buku::latest()->paginate(5);
+        return view('buku.buku', compact('buku'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('buku.create');
+    {   
+        $data = [
+            'buku' => new Buku(),
+            'kategori' => Kategori::pluck('nm_kategori', 'id')
+        ];
+        return view('buku.create', $data);
     }
 
     /**
@@ -33,23 +38,26 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'id_buku' => 'required',
-            'id_kategori' => 'required',
-            'nm_buku' => 'required',
+          $buku = $request->validate([
+            'judul' => 'required',
             'penulis' => 'required',
             'penerbit' => 'required',
-            'thn_buku' => 'required',
+            'thn_terbit' => 'required',
+            'gambar' => 'required|image:jpeg,jpg,png',
+            'deskripsi' => 'required',
+            'id_kategori' => 'required',
         ]);
 
-        $model = Buku::create([
-            'id_buku' => $request->id_buku,
-            'id_kategori' => $request->id_kategori,
-            'nm_buku' => $request->nm_buku,
-            'penulis' => $request->penulis,
-            'penerbit' => $request->penerbit,
-            'thn_buku' => $request->thn_buku,
-        ]);
+        $image = $request ->file('gambar');
+        $namaGambar= $request -> judul . '.' . $image ->extension();
+        $image-> move(public_path('img/buku'), $namaGambar);
+        $buku['gambar'] =$namaGambar;
+
+        buku::create($buku);
+        return redirect()->route('buku.index');
+
+
+      
     }
 
     /**
@@ -57,7 +65,6 @@ class BukuController extends Controller
      */
     public function show(string $id)
     {
-        
     }
 
     /**
@@ -65,7 +72,7 @@ class BukuController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('buku.edit', compact('buku'));
     }
 
     /**
@@ -73,14 +80,34 @@ class BukuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'nm_buku' => 'required',
+            'id_kategori' => 'required',
+            'deskripsi' => 'required',
+            'penerbit' => 'required',
+            'penulis' => 'required',
+            'thn_terbit' => 'required',
+            'gambar' => 'image:jpeg,jpg,png',
+        ]);
+
+        $buku = Buku::find($id);
+        $buku->update($request->all());
+        return redirect()->route('buku.index')->with('success', 'Buku berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Buku $buku)
     {
-        //
+        
+        
+        // Delete the image file from storage
+        Storage::delete('public/img/buku/'.$buku->gambar);
+        
+        // Delete the book record from the database
+        $buku->delete();
+        
+        return redirect()->route('buku.index')->with('success', 'Buku berhasil dihapus.');
     }
 }
