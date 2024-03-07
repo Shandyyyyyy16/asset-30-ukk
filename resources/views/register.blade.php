@@ -27,6 +27,14 @@
                                 <input type="email" class="form-control" id="email" placeholder="Enter email">
                             </div>
                             <div class="form-group">
+                                <label for="email">Telepon</label>
+                                <input type="number" class="form-control" id="email" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" placeholder="Enter password">
                             </div>

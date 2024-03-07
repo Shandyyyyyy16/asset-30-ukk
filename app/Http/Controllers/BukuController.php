@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Buku;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
@@ -44,6 +43,7 @@ class BukuController extends Controller
             'penerbit' => 'required',
             'thn_terbit' => 'required',
             'gambar' => 'required|image:jpeg,jpg,png',
+            'stok' => 'required',
             'deskripsi' => 'required',
             'id_kategori' => 'required',
         ]);
@@ -95,6 +95,7 @@ class BukuController extends Controller
             'penulis' => 'required',
             'thn_terbit' => 'required',
             'gambar' => 'image:jpeg,jpg,png',
+            'stok' => 'required',
         ]);
 
 
@@ -106,6 +107,7 @@ class BukuController extends Controller
             'penerbit' =>   $request->penerbit,
             'penulis' =>    $request->penulis,
             'thn_terbit' =>     $request->thn_terbit,
+            'stok' =>     $request->stok,
       ]);
 
       if($request->hasFile('gambar')){
@@ -140,5 +142,11 @@ class BukuController extends Controller
         $buku->delete();
         
         return redirect()->route('buku.index')->with('success', 'Buku berhasil dihapus.');
+    }
+
+    public function daftarBuku()
+    {
+        $buku = Buku::latest()->paginate(10);
+        return view('peminjam.buku', compact('buku'));
     }
 }

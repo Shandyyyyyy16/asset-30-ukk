@@ -53,8 +53,14 @@
                     <li><a href="#map">Maps</a></li>
                     <li><a href="#portfolio">Buku</a></li>
                     </li>
-                    <a href="/login"><button type="button" type="login" class=" btn btn-primary mx-4"
-                            style="width: 100px;  ">Login</button></a>
+                    @if (Route::has('login'))
+                        @auth
+                            <a href="{{ route('logout') }}">Log Out</a>
+                        @else
+                            <a href="{{ route('login') }}"><button type="button" type="login"
+                                    class=" btn btn-primary mx-4" style="width: 100px;  ">Login</button></a>
+                        @endauth
+                    @endif
                 </ul>
             </nav><!-- .navbar -->
 
@@ -365,13 +371,13 @@
                     </ul>
                 </div>
 
-               
 
-                
+
+
             </div>
         </div>
 
-        
+
 
     </footer><!-- End Footer -->
     <!-- End Footer -->

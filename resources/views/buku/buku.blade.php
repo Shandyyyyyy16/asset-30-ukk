@@ -15,7 +15,8 @@
                                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">DataTable</li>
                             </ol>
-                            <a href="{{route('buku.create')}}" type="button" class="btn btn-secondary mb-4">Tambah Buku </a>
+                            <a href="{{ route('buku.create') }}" type="button" class="btn btn-secondary mb-4">Tambah Buku
+                            </a>
                         </nav>
                     </div>
                 </div>
@@ -34,6 +35,8 @@
                                     <th>judul buku</th>
                                     <th>penulis</th>
                                     <th>penerbit</th>
+
+                                    <th>stok</th>
                                     <th>tahun_terbit</th>
                                     <th>gambar</th>
                                     <th>tindakan</th>
@@ -41,42 +44,33 @@
                             </thead>
                             <tbody>
                                 @forelse ($buku as $item)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$item->kategori->nm_kategori}}</td>
-                                    <td>{{$item->judul}}</td>
-                                    <td>{{$item->penulis}}</td>
-                                    <td>{{$item->penerbit}}</td>
-                                    <td>{{$item->thn_terbit}}</td>
-                                    <td><img src="{{ asset('img/buku/'.$item->gambar) }}" alt="" width="230" height="200"></td>
-                                   
-                                    <td>
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->kategori->nm_kategori }}</td>
+                                        <td>{{ $item->judul }}</td>
+                                        <td>{{ $item->penulis }}</td>
+                                        <td>{{ $item->penerbit }}</td>
+                                        <td>{{ $item->stok }}</td>
+                                        <td>{{ $item->thn_terbit }}</td>
+                                        <td><img src="{{ asset('img/buku/' . $item->gambar) }}" alt="" width="230"
+                                                height="200"></td>
+                                        lpopo;{}
+                                        <td>
 
-                                        {{-- <a href="/buku.detail"> <button type="button"
+                                            {{-- <a href="/buku.detail"> <button type="button"
                                                 class="btn btn-info">detail</button></a> --}}
-                                                <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-secondary">Edit</a>
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('buku.destroy', $item->id) }}" method="POST">
-                                                    @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-primary mt-2">Hapus</button>
-                                         
-                                           
-        
-                                    </form>
-                                              
+                                            <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-secondary">koleksi</a>
+                                            <a href="{{ route('buku.pinjam.create', $item->id) }}" class="btn btn-secondary">minjem</a>
 
+                                        </td>
 
-                                        
-                                    </td>
-
-                                </tr>
+                                    </tr>
                                 @empty
-                                    
                                 @endforelse
-                                
+
                             </tbody>
                         </table>
-                        {{ $buku->links() }}
+                        
                     </div>
                 </div>
 

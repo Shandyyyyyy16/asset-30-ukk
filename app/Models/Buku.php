@@ -19,10 +19,16 @@ class Buku extends Model
         'penerbit',
         'thn_terbit',
         'gambar',
+        'stok',
     ];
 
     public function kategori()
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');
+    }
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'id_buku');
     }
 }

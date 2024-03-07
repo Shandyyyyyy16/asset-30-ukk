@@ -6,7 +6,7 @@
                 <div class="col-12 col-md-6 order-md-1 order-last">
 
 
-                    <a href="/partial.create" type="button" class="btn btn-warning mb-4">Tambah data petugas</a>
+                    <a href="{{ route('user.create') }}" type="button" class="btn btn-warning mb-4">Tambah data petugas</a>
 
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
@@ -32,24 +32,34 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama Lengkap</th>
+                                <th>Email</th>
                                 <th>Alamat</th>
+                                <th>Telepon</th>
                                 <th>Role</th>
                                 <th>Tindakan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Shandy Fakhri</td>
-                                <td>Cipondoh</td>
-                                <td>user</td>
-                                <td>
-                                    <a href="/partial.edit"> <button type="button"
-                                            class="btn btn-primary">edit</button></a>
-                                    <button type="button" class="btn btn-danger">Hapus</button>
-                                </td>
-
-                            </tr>
+                            @forelse ($model as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->alamat }}</td>
+                                    <td>{{ $item->telepon }}</td>
+                                    <td>{{ $item->role }}</td>
+                                    <td>
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('user.destroy', $item->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-primary">Hapus</button>
+                                            <a href="{{ route('user.edit', $item->id) }}" class="btn btn-secondary">Edit</a>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -23,8 +23,8 @@
     <div id="app">
 
         <!-- sidebar-->
-
-        @include('layouts.sidebar')
+        
+        @include('layouts.sidebar') 
 
         <!-- Need: Apexcharts -->
 
@@ -33,8 +33,6 @@
             @include('layouts.header')
 
             @yield('konten')
-
-
 
             @include('layouts.footer')
         </div>

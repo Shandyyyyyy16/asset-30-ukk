@@ -1,9 +1,18 @@
 <?php
 
 use App\Models\Kategori;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\DaftarBukuController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\BerandaAdminController;
+use App\Http\Controllers\PeminjamBukuController;
+use App\Http\Controllers\BerandaPetugasController;
+use App\Http\Controllers\BerandaPeminjamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,77 +35,41 @@ use App\Http\Controllers\KategoriController;
 // Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
 
 
-Route::resource('/buku', \App\Http\Controllers\BukuController::class);
-Route::post('/buku/{id}', [BukuController::class, 'index']);
-
-
-Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
-Route::post('/kategori/{id}', [KategoriController::class, 'index']);
-
-
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/index', function () {
     return view('index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+
+// Route::get('/kategori.kategori', function () {
+//     return view('kategori.kategori');
+// });
+
+Auth::routes();
+
+Route::get('logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('admin')->middleware(['auth', 'auth.admin'])->group(function () {
+    Route::get('beranda', [BerandaAdminController::class, 'index'])->name('admin.beranda');
+    Route::resource('user', UserController::class);
+    Route::resource('buku', BukuController::class);
+    Route::resource('kategori', KategoriController::class);
+    Route::get('daftarBuku', [BukuController::class, 'daftarBuku'])->name('daftarBuku');
 });
-
-Route::get('/partial.table', function () {
-    return view('partial.table');
+Route::prefix('petugas')->middleware(['auth', 'auth.petugas'])->group(function () {
+    Route::get('beranda', [BerandaPetugasController::class, 'index'])->name('petugas.beranda');
 });
-
-Route::get('/partial.edit', function () {
-    return view('partial.edit');
-});
-
-Route::get('/partial.create', function () {
-    return view('partial.create');
-});
-
-
-
-
-
-
-Route::get('/kategori.create', function () {
-    return view('kategori.create');
-});
-
-
-
-Route::get('/koleksi.koleksi', function () {
-    return view('koleksi.koleksi');
-});
-
-Route::get('/buku.detail', function () {
-    return view('buku.detail');
-});
-
-Route::get('/buku.ulasan', function () {
-    return view('buku.ulasan');
-});
-Route::get('/peminjaman.table', function () {
-    return view('peminjaman.table');
-});
-Route::get('/login', function () {
-    return view('login');
-});
-Route::get('/register', function () {
-    return view('register');
-});
-
-Route::get('/user.dashboard', function () {
-    return view('user.dashboard');
-});
-
-
-Route::get('/user.buku', function () {
-    return view('user.buku');
+Route::prefix('peminjam')->middleware(['auth', 'auth.peminjam'])->group(function () {
+    Route::get('beranda', [BerandaPeminjamController::class, 'index'])->name('peminjam.beranda');
+    Route::resource('pustaka', DaftarBukuController::class);
+    Route::get('/buku/{id}/pinjem', [PeminjamanController::class, 'pinjem'])->name('buku.pinjam.create');
+    Route::post('/pustaka/{id}/pinjam', [PeminjamanController::class, 'pinjam'])->name('pustaka.pinjam');
+   
 });

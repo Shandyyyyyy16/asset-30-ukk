@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('penerbit');
             $table->string('thn_terbit');
             $table->string('gambar');
+            $table->string('stok');
             $table->string('deskripsi');
             $table->timestamps();
             $table->foreignId('id_kategori')->references('id')->on('kategori')->onDelete('cascade');

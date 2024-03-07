@@ -86,6 +86,11 @@
                     
                 </div>
                 <div class="form-group">
+                    <label for="Stok">Stok:</label>
+                    <input type="file" class="form-control" id="stok" value="{{ $buku->stok }}" name="stok">
+                    
+                </div>
+                <div class="form-group">
                     <label for="id_kategori">Kategori:</label>
                    
                       

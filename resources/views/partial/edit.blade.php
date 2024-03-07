@@ -13,28 +13,59 @@
 
         <div class="container mt-5">
             <h2>Edit form</h2>
-            <form>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $err)
+                            <li>{{ $err }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form action="{{ route('user.update', $user->id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
                 <div class="form-group">
-                    <label for="nomor">Nomor:</label>
-                    <input type="text" class="form-control" id="nomor" placeholder="1" readonly>
+                    <label for="nomor">Nama Lengkap:</label>
+                    <input type="text" class="form-control" id="nomor" placeholder="1" name="name"
+                        value="{{ $user->name }}">
                 </div>
                 <div class="form-group">
-                    <label for="nama">Nama Lengkap:</label>
-                    <input type="text" class="form-control" id="nama" placeholder="Shandy Fakhri" readonly>
+                    <label for="nama">Email:</label>
+                    <input type="text" class="form-control" id="nama" name="email" value="{{ $user->email }}">
                 </div>
                 <div class="form-group">
                     <label for="alamat">Alamat:</label>
-                    <textarea class="form-control" id="alamat" rows="5" placeholder="Cipondoh"></textarea>
+                    <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $user->alamat }}">
+                </div>
+                <div class="form-group">
+                    <label for="alamat">Telepon:</label>
+                    <input type="text" class="form-control" id="telepon" name="telepon" value="{{ $user->telepon }}">
                 </div>
 
                 <div class="form-group">
-                    <select class="form-select mt-3" aria-label="Default select example">
-                        <option selected>Role</option>
-                        <option value="admin">admin</option>
-                        <option value="user">user</option>
-                        <option value="3">Three</option>
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select class="form-select" aria-label="Default select example" name="role">
+                        <option selected>{{ $user->role }}</option>
+                        @if ($user->role == 'admin')
+                            <option value="petugas">petugas</option>
+                            <option value="peminjam">peminjam</option>
+                        @elseif ($user->role == 'petugas')
+                            <option value="admin">admin</option>
+                            <option value="peminjam">peminjam</option>
+                        @elseif ($user->role == 'peminjam')
+                            <option value="admin">admin</option>
+                            <option value="petugas">petugas</option>
+                        @endif
                     </select>
                 </div>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
 

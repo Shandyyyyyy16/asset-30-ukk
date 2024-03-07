@@ -47,6 +47,11 @@
                     <span class="text-danger">{{ $errors->first('gambar') }}</span>
                 </div>
                 <div class="form-group">
+                    <label for="penulis">stok:</label>
+                    <input type="number" class="form-control" id="stok" name="stok">
+                    <span class="text-danger">{{ $errors->first('stok') }}</span>
+                </div>
+                <div class="form-group">
                     <label for="ulasan">kategori:</label>
 
                     {!! Form::select('id_kategori', $kategori, null, ['class' => 'form-control', 'placeholder' => 'Pilih Kategori']) !!}
