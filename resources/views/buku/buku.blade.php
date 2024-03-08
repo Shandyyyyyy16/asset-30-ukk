@@ -59,8 +59,8 @@
 
                                             {{-- <a href="/buku.detail"> <button type="button"
                                                 class="btn btn-info">detail</button></a> --}}
-                                            <a href=""
-                                                class="btn btn-secondary">koleksi</a>
+                                            {{-- <a href=""
+                                                class="btn btn-secondary">detail</a> --}}
                                             <a href="{{ route('buku.pinjam.create', $item->id) }}"
                                                 class="btn btn-secondary">minjem</a>
 

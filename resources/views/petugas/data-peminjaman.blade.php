@@ -8,7 +8,7 @@
                     <th>Cover</th>
                     <th>Judul Buku</th>
                     <th>Tanggal Peminjaman</th>
-                    <th>Tgl kembali</th>
+                    <th>Tanggal Kembali</th>
                     <th>status</th>
                 </tr>
             </thead>

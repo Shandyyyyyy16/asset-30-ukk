@@ -66,12 +66,12 @@
                             <span>Kategori</span>
                         </a>
                     </li>
-                    <li class="sidebar-item  ">
+                    {{-- <li class="sidebar-item  ">
                         <a href="/koleksi.koleksi" class='sidebar-link'>
                             <i class="bi bi-bag-dash-fill"></i>
                             <span>Koleksi</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="sidebar-item  ">
                         <a href="{{ route('Peminjaman.index') }}" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
@@ -92,39 +92,39 @@
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
                     <li class="sidebar-item  ">
-                        <a href="/dashboard" class='sidebar-link'>
+                        <a href="{{ route('petugas.beranda') }}" class='sidebar-link'>
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li class="sidebar-item ">
-                        <a href="{{ route('user.index') }}" class='sidebar-link'>
+                        <a href="{{ route('user-ofc.index') }}" class='sidebar-link'>
                             <i class="bi bi-people"></i>
-                            <span>User</span>
+                            <span>Data Peminjam</span>
                         </a>
                     </li>
                     <li class="sidebar-item  ">
-                        <a href="{{ route('buku.index') }}" class='sidebar-link'>
+                        <a href="{{ route('buku-ofc.index') }}" class='sidebar-link'>
                             <i class="bi bi-book"></i>
                             <span>Daftar buku</span>
                         </a>
                     </li>
-                    <li class="sidebar-item  ">
+                    {{-- <li class="sidebar-item  ">
                         <a href="{{ route('kategori.index') }} " class='sidebar-link'>
                             <i class="bi bi-stack"></i>
                             <span>Kategori</span>
-                        </a>
+                        </a> --}}
                     </li>
                     <li class="sidebar-item  ">
-                        <a href="/koleksi.koleksi" class='sidebar-link'>
-                            <i class="bi bi-bag-dash-fill"></i>
-                            <span>Koleksi</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item  ">
-                        <a href="/peminjaman.table" class='sidebar-link'>
+                        <a href="{{ route('data-peminjaman') }}" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
-                            <span>Peminjaman </span>
+                            <span>Peminjaman</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('peminjam-ofc.index') }}" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Peminjaman Kembalikan</span>
                         </a>
                     </li>
                     <li class="sidebar-item  ">
@@ -152,12 +152,12 @@
                             <span>Daftar buku</span>
                         </a>
                     </li>
-                    <li class="sidebar-item  ">
+                    {{-- <li class="sidebar-item  ">
                         <a href="/koleksi.koleksi" class='sidebar-link'>
                             <i class="bi bi-bag-dash-fill"></i>
                             <span>Koleksi</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="sidebar-item  ">
                         <a href="{{ route('dataPeminjaman') }}" class='sidebar-link'>
                             <i class="bi bi-stack"></i>

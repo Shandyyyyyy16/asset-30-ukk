@@ -19,7 +19,7 @@
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Buku</h6>
-                                        <h6 class="font-extrabold mb-0">0</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $buku }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Kategori Buku</h6>
-                                        <h6 class="font-extrabold mb-0">0</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $kategori }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="col">
                                         <h6 class="text-muted font-semibold">Buku yang dipinjam</h6>
-                                        <h6 class="font-extrabold mb-0">0</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $dipinjam }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -76,14 +76,14 @@
                             margin-top: 10px;
                         }
                     </style>
-                  
 
-                
 
-                        <div class="kotak">
-                            <p>Nama: {{ Auth::user()->name }}</p>
-                            <p>Role: {{ Auth::user()->role }}</p>
-                        </div>
+
+
+                    <div class="kotak">
+                        <p>Nama: {{ Auth::user()->name }}</p>
+                        <p>Role: {{ Auth::user()->role }}</p>
+                    </div>
                 </div>
 
 

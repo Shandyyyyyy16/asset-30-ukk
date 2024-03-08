@@ -48,7 +48,10 @@
                         <strong>Penulis:</strong> {{ $buku->penulis }}
                     </div>
                     <div class="mb-3">
-                        <strong>Tahun Terbit:</strong> {{ $buku->tahun_terbit }}
+                        <strong>Tahun Terbit:</strong> {{ $buku->thn_terbit }}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Stok:</strong> {{ $buku->stok }}
                     </div>
                     <div class="mb-3">
                         <strong>deskripsi:</strong> {{ $buku->deskripsi }}

@@ -47,6 +47,16 @@ class PeminjamanController extends Controller
         return redirect()->back();
     }
 
+    public function petugasKembali($id)
+    {
+        $pinjam = Peminjaman::findOrFail($id);
+        $pinjam->status = 'kembali';
+        $pinjam->tgl_kembali = date('Y-m-d');
+        $pinjam->buku->stok++;
+        $pinjam->save();
+        return redirect()->back();
+    }
+
     public function dataPeminjaman()
     {
         $userId = Auth::id();

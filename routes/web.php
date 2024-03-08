@@ -11,11 +11,14 @@ use App\Http\Controllers\KoleksiController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DaftarBukuController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\BukuPetugasController;
 use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\PeminjamBukuController;
 use App\Http\Controllers\AdminPeminjamController;
 use App\Http\Controllers\BerandaPetugasController;
 use App\Http\Controllers\BerandaPeminjamController;
+use App\Http\Controllers\DataPeminjamController;
+use App\Http\Controllers\PeminjamPetugasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +74,11 @@ Route::prefix('admin')->middleware(['auth', 'auth.admin'])->group(function () {
 });
 Route::prefix('petugas')->middleware(['auth', 'auth.petugas'])->group(function () {
     Route::get('beranda', [BerandaPetugasController::class, 'index'])->name('petugas.beranda');
+    Route::resource('peminjam-ofc', PeminjamPetugasController::class);
+    Route::resource('buku-ofc', BukuPetugasController::class);
+    Route::post('buku/{id}/kembalikan', [PeminjamanController::class, 'petugasKembali'])->name('buku.kembali');
+    Route::get('data-peminjaman', [PeminjamPetugasController::class, 'peminjamIndex'])->name('data-peminjaman');
+    Route::resource('user-ofc', DataPeminjamController::class);
 });
 Route::prefix('peminjam')->middleware(['auth', 'auth.peminjam'])->group(function () {
     Route::get('beranda', [BerandaPeminjamController::class, 'index'])->name('peminjam.beranda');
@@ -79,4 +87,5 @@ Route::prefix('peminjam')->middleware(['auth', 'auth.peminjam'])->group(function
     Route::post('/pustaka/{id}/pinjam', [PeminjamanController::class, 'pinjam'])->name('pustaka.pinjam');
     Route::get('dataPeminjaman', [PeminjamanController::class, 'dataPeminjaman'])->name('dataPeminjaman');
     Route::resource('koleksi', KoleksiController::class);
+ 
 });

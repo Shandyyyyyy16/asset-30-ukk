@@ -8,8 +8,9 @@
                     <th>Cover</th>
                     <th>Judul Buku</th>
                     <th>Tanggal Peminjaman</th>
-                    <th>Tgl kembali</th>
+                    <th>Tanggal Kembali</th>
                     <th>status</th>
+                    <th>Tindakan</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,12 @@
                         <td>{{ $item->tgl_pinjam }}</td>
                         <td>{{ $item->tgl_kembali }}</td>
                         <td>{{ $item->status }}</td>
+                        <td>
+                            <form action="{{ route('buku.kembali', $item->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Kembalikan</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
