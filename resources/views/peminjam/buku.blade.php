@@ -56,7 +56,7 @@
                                     <td>
                                         @if (Auth::user()->role == 'admin' || Auth::user()->role == 'petugas')
                                             <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-secondary">Edit</a>
-                                            <a href="{{ route('buku.edit', $item->id) }}"
+                                            <a href="{{ route('buku.show', $item->id) }}"
                                                 class="btn btn-secondary mt-3">detail</a>
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?')"
                                                 action="{{ route('buku.destroy', $item->id) }}" method="POST">

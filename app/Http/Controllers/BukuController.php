@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Buku;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
@@ -14,17 +15,17 @@ class BukuController extends Controller
      */
     public function index()
     {
-      
 
-        $buku = Buku::latest()->paginate(5);
-        return view('buku.buku', compact('buku'));
+
+        $buku = Buku::with('kategori')->paginate(5);
+        return view('peminjam.buku', compact('buku'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         $data = [
             'buku' => new Buku(),
             'kategori' => Kategori::pluck('nm_kategori', 'id')
@@ -37,7 +38,7 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-          $buku = $request->validate([
+        $buku = $request->validate([
             'judul' => 'required',
             'penulis' => 'required',
             'penerbit' => 'required',
@@ -48,25 +49,22 @@ class BukuController extends Controller
             'id_kategori' => 'required',
         ]);
 
-        $image = $request ->file('gambar');
-        $namaGambar= $request -> judul . '.' . $image ->extension();
-        $image-> move(public_path('img/buku'), $namaGambar);
-        $buku['gambar'] =$namaGambar;
+        $image = $request->file('gambar');
+        $namaGambar = $request->judul . '.' . $image->extension();
+        $image->move(public_path('img/buku'), $namaGambar);
+        $buku['gambar'] = $namaGambar;
 
         buku::create($buku);
         return redirect()->route('buku.index');
-
-
-      
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Buku $buku)
+    public function show($id)
     {
 
-        $post = Buku::findOrFail($buku);
+        $buku = Buku::findOrFail($id);
         return view('buku.detail', compact('buku'));
     }
 
@@ -75,10 +73,9 @@ class BukuController extends Controller
      */
     public function edit(Buku $buku)
     {
-        
+
         return view('buku.edit', [
-            'buku' => $buku
-            , 'kategori' => Kategori::pluck('nm_kategori', 'id')
+            'buku' => $buku, 'kategori' => Kategori::pluck('nm_kategori', 'id')
         ]);
     }
 
@@ -99,32 +96,32 @@ class BukuController extends Controller
         ]);
 
 
-      
-      $buku->update([
-         'judul' => $request->judul,
+
+        $buku->update([
+            'judul' => $request->judul,
             'id_kategori' => $request->id_kategori,
             'deskripsi' =>  $request->deskripsi,
             'penerbit' =>   $request->penerbit,
             'penulis' =>    $request->penulis,
             'thn_terbit' =>     $request->thn_terbit,
             'stok' =>     $request->stok,
-      ]);
-
-      if($request->hasFile('gambar')){
-
-        $gambar = $request->file('gambar');
-        // $gambar ->storeAs('public/img/buku/', $gambar);
-        $namaGambar= $request -> judul . '.' . $gambar ->extension();
-        $gambar-> move(public_path('img/buku'), $namaGambar);
-
-        Storage::delete('public/img/buku/'.$buku->gambar);
-
-        $buku->update([
-            'gambar' => $namaGambar
         ]);
-      }
 
-      
+        if ($request->hasFile('gambar')) {
+
+            $gambar = $request->file('gambar');
+            // $gambar ->storeAs('public/img/buku/', $gambar);
+            $namaGambar = $request->judul . '.' . $gambar->extension();
+            $gambar->move(public_path('img/buku'), $namaGambar);
+
+            Storage::delete('public/img/buku/' . $buku->gambar);
+
+            $buku->update([
+                'gambar' => $namaGambar
+            ]);
+        }
+
+
         return redirect()->route('buku.index')->with('success', 'Data Berhasil diubah.     ');
     }
 
@@ -133,14 +130,14 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {
-        
-        
+
+
         // Delete the image file from storage
-        Storage::delete('public/img/buku/'.$buku->gambar);
-        
+        Storage::delete('public/img/buku/' . $buku->gambar);
+
         // Delete the book record from the database
         $buku->delete();
-        
+
         return redirect()->route('buku.index')->with('success', 'Buku berhasil dihapus.');
     }
 

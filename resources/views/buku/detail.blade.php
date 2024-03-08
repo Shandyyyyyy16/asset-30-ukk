@@ -37,27 +37,27 @@
         <div class="container mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{$buku->judul}}</h5>
+                    <h5 class="card-title">{{ $buku->judul }}</h5>
                     <div class="mb-3">
-                        <strong>Kategori:</strong> {{$buku->kategori->nama}}
+                        <strong>Kategori:</strong> {{ $buku->kategori->nm_kategori }}
                     </div>
                     <div class="mb-3">
-                        <strong>Penerbit:</strong> {{$buku->penerbit}}
+                        <strong>Penerbit:</strong> {{ $buku->penerbit }}
                     </div>
                     <div class="mb-3">
-                        <strong>Penulis:</strong> {{$buku->penulis}}
+                        <strong>Penulis:</strong> {{ $buku->penulis }}
                     </div>
                     <div class="mb-3">
-                        <strong>Tahun Terbit:</strong> {{$buku->tahun_terbit}}
+                        <strong>Tahun Terbit:</strong> {{ $buku->tahun_terbit }}
                     </div>
                     <div class="mb-3">
-                        <strong>deskripsi:</strong> {{$buku->deskripsi}}
+                        <strong>deskripsi:</strong> {{ $buku->deskripsi }}
                     </div>
                     <div class="mb-3">
-                        <strong>gambar:</strong> <img src="{{ asset('public/img/'.$item->gambar) }}">
+                        <img src="{{ asset('img/buku/' . $buku->gambar) }}" alt="" width="230" height="200">
                     </div>
-                    
-                    <a href="{{ route('buku.ulasan', $buku->id) }}" class="btn btn-primary">Ulasan</a>
+
+                    <a href="" class="btn btn-primary">Ulasan</a>
                     <a href="{{ route('buku.index') }}" class="btn btn-secondary">Kembali</a>
                 </div>
             </div>

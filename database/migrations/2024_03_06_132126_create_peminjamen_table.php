@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->date('return_date');
-            $table->date('returned_at')->nullable();
-            $table->string('status');
             $table->unsignedBigInteger('buku_id');
             $table->foreign('buku_id')->references('id')->on('buku');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->date('tgl_pinjam');
+            $table->date('tgl_kembali')->nullable();
+            $table->enum('status', ['pinjam', 'kembali']);
             $table->timestamps();
         });
     }

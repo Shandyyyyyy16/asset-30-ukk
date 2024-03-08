@@ -8,7 +8,9 @@
                     <th>Cover</th>
                     <th>Judul Buku</th>
                     <th>Tanggal Peminjaman</th>
+                    <th>Tanggal Kembali</th>
                     <th>status</th>
+                    <th>Tindakan</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +21,11 @@
                                 height="200"></td>
                         <td>{{ $item->buku->judul }}</td>
                         <td>{{ $item->tgl_pinjam }}</td>
+                        <td>{{ $item->tgl_kembali }}</td>
                         <td>{{ $item->status }}</td>
+                        <td>
+                            <a href="{{ route('Peminjaman.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

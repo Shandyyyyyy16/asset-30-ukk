@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PeminjamanController extends Controller
 {
@@ -16,7 +17,7 @@ class PeminjamanController extends Controller
     public function pinjam(Request $request, $id)
     {
         $request->validate([
-            'return_date' => 'required|date|after_or_equal:today'
+            'tgl_pinjam' => 'required|date|after_or_equal:today'
         ]);
 
         $buku = Buku::findOrFail($id);
@@ -27,12 +28,29 @@ class PeminjamanController extends Controller
         $pinjam = new Peminjaman();
         $pinjam->user_id = auth()->id(); // ID pengguna yang melakukan peminjaman
         $pinjam->buku_id = $id;
-        $pinjam->return_date = $request->return_date;
-        $pinjam->status = 'DIpinjam';
+        $pinjam->tgl_pinjam = $request->tgl_pinjam;
+        $pinjam->status = 'pinjam';
         $pinjam->save();
 
         $buku->stok--;
         $buku->save();
         return redirect()->route('pustaka.index');
+    }
+
+    public function kembalikan($id)
+    {
+        $pinjam = Peminjaman::findOrFail($id);
+        $pinjam->status = 'kembali';
+        $pinjam->tgl_kembali = date('Y-m-d');
+        $pinjam->buku->stok++;
+        $pinjam->save();
+        return redirect()->back();
+    }
+
+    public function dataPeminjaman()
+    {
+        $userId = Auth::id();
+        $data = Peminjaman::with('buku', 'user')->where('user_id', $userId)->get();
+        return view('peminjaman.table', compact('data'));
     }
 }

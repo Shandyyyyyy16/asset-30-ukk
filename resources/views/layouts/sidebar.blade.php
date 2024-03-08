@@ -55,7 +55,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item  ">
-                        <a href="{{ route('daftarBuku') }}" class='sidebar-link'>
+                        <a href="{{ route('buku.index') }}" class='sidebar-link'>
                             <i class="bi bi-book"></i>
                             <span>Daftar buku</span>
                         </a>
@@ -73,7 +73,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item  ">
-                        <a href="/peminjaman.table" class='sidebar-link'>
+                        <a href="{{ route('Peminjaman.index') }}" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
                             <span>Peminjaman </span>
                         </a>
@@ -159,7 +159,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item  ">
-                        <a href="/peminjaman.table" class='sidebar-link'>
+                        <a href="{{ route('dataPeminjaman') }}" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
                             <span>Peminjaman </span>
                         </a>

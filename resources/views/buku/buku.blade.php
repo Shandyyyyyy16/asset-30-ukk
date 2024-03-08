@@ -52,15 +52,17 @@
                                         <td>{{ $item->penerbit }}</td>
                                         <td>{{ $item->stok }}</td>
                                         <td>{{ $item->thn_terbit }}</td>
-                                        <td><img src="{{ asset('img/buku/' . $item->gambar) }}" alt="" width="230"
-                                                height="200"></td>
+                                        <td><img src="{{ asset('img/buku/' . $item->gambar) }}" alt=""
+                                                width="230" height="200"></td>
                                         lpopo;{}
                                         <td>
 
                                             {{-- <a href="/buku.detail"> <button type="button"
                                                 class="btn btn-info">detail</button></a> --}}
-                                            <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-secondary">koleksi</a>
-                                            <a href="{{ route('buku.pinjam.create', $item->id) }}" class="btn btn-secondary">minjem</a>
+                                            <a href=""
+                                                class="btn btn-secondary">koleksi</a>
+                                            <a href="{{ route('buku.pinjam.create', $item->id) }}"
+                                                class="btn btn-secondary">minjem</a>
 
                                         </td>
 
@@ -70,7 +72,7 @@
 
                             </tbody>
                         </table>
-                        
+
                     </div>
                 </div>
 
